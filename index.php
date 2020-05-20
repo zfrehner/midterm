@@ -25,18 +25,28 @@ $f3->route('GET /', function() {
 
 $f3-> route('GET|POST /survey', function($f3) {
 
-
+    $_SESSION = array();
     $boxes = getBoxes();
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //var_dump($_POST);
         //Store the data in the session array
-        $_SESSION['firstName'] = $_POST['firstName'];
-        $_SESSION['boxes'] = $_POST['boxes'];
+        //$_SESSION['firstName'] = $_POST['firstName'];
+        //$_SESSION['boxes'] = $_POST['boxes'];
 
-
-        $f3->reroute('/summary');
+        $name = $_POST['firstName'];
+        $box = $_POST['boxes'];
+        if (validName($name) && validArray($box)) {
+            $_SESSION['firstName'] = $name;
+            $f3->reroute('/summary');
+        }
+        else {
+            $f3->set("errors['err']", "Please fill out both questions.");
+        }
     }
+
+
+
 
     $f3->set('boxes', $boxes);
     $view = new Template();
