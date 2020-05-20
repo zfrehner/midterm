@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Survey</title>
 </head>
 <body>
 <h1>Midterm Survey</h1>
+
+<div class="container">
+
+    <form class="form-group" id="personal" action="#" method="post">
+
+        <div class="form-group">
+            <label class="bold" for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+        </div>
+
+        <h5>Check all that apply: </h5>
+        <repeat group="{{ @boxes }}" value="{{ @box }}">
+            <label><input type="checkbox"
+                          name="indoor[]"
+                          value="{{ @box }}"> {{ ucfirst(@box) }}</label><br>
+        </repeat>
+
+        <button class="btn btn-primary btn-lg" role="button" id="submit" type="submit">Submit</button>
+    </form>
+
+</div>
 </body>
 </html>
