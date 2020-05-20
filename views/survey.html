@@ -16,13 +16,13 @@
 
         <div class="form-group">
             <label class="bold" for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName">
+            <input type="text" class="form-control" id="firstName" name="firstName" value="{{ @firstName }}">
         </div>
 
         <h5>Check all that apply: </h5>
         <repeat group="{{ @boxes }}" value="{{ @box }}">
             <label><input type="checkbox"
-                          name="indoor[]"
+                          name="boxes[]"
                           value="{{ @box }}"> {{ ucfirst(@box) }}</label><br>
         </repeat>
 

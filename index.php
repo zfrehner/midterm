@@ -4,16 +4,16 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-
+session_start();
 
 //require auto load file
 require_once("vendor/autoload.php");
 require_once("model/data-layer.php");
 
-session_start();
-
 //instantiate f3 base class (create an instance of the base class)
 $f3 = Base::instance();
+
+$f3->set('boxes', getBoxes());
 
 //define a default root (what the user sees when they go to index page)
 $f3->route('GET /', function() {
@@ -25,28 +25,29 @@ $f3->route('GET /', function() {
 
 $f3-> route('GET|POST /survey', function($f3) {
 
-    $_SESSION = array();
+    //$_SESSION = array();
     $boxes = getBoxes();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //var_dump($_POST);
+        var_dump($_POST);
         //Store the data in the session array
-        //$_SESSION['firstName'] = $_POST['firstName'];
-        //$_SESSION['boxes'] = $_POST['boxes'];
+        $_SESSION['firstName'] = $_POST['firstName'];
+        $_SESSION['boxes'] = $_POST['boxes'];
 
         $name = $_POST['firstName'];
         $box = $_POST['boxes'];
+
         if (validName($name) && validArray($box)) {
             $_SESSION['firstName'] = $name;
+            $_SESSION['boxes'] = $box;
+
             $f3->reroute('/summary');
         }
         else {
             $f3->set("errors['err']", "Please fill out both questions.");
+            $f3->reroute('/summary');
         }
     }
-
-
-
 
     $f3->set('boxes', $boxes);
     $view = new Template();
