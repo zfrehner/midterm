@@ -1,0 +1,12 @@
+{
+  "name": "zfrehner/328/midterm",
+  "authors": [
+    {
+      "name": "Zach Frehner",
+      "email": "zfrehner@mail.greenriver.com"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
