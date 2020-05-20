@@ -25,7 +25,7 @@ $f3->route('GET /', function() {
 
 $f3-> route('GET|POST /survey', function($f3) {
 
-    //$_SESSION = array();
+
     $boxes = getBoxes();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
